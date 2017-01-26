@@ -10,6 +10,10 @@ According to [Wikipedia](https://en.wikipedia.org/wiki/Matched_betting), matched
 In it's simplest form you back an event at a bookmaker and lay the same event at a betting exchange or (another) bookmaker. When done properly, assuming you back bet with bonus 'free' money at the bookmaker, you can extract 70-80% of the bonus, converting it to real, withdrawable money.
 To make the process risk-free and eliminate gambling it is essential the your bet gain the same profit either if the back bet wins or loses (in which case the lay bet wins). This calculator helps you calculate the stake you should lay to have equal profit regardless the outcome and determines the liability and also displays a detailed breakdown of your profit in each case. Laying a stake different from the calculated one (unclicking the *calculate* checkbox can be helpful with advanced concepts like underlaying/overlaying.
 
+## Demo
+
+The app is deployed to Heroku. The url is http://desolate-mountain-19653.herokuapp.com/
+
 ## Setting up development environment
 
 1. Clone the github repository
