@@ -111,7 +111,7 @@ var Calculator = React.createClass({
 
                     var breakdown = {
                         backWins: {back: b1 * (o1 - 1), lay: -b2 * (o2 - 1)},
-                        layWins: {back: -b1 + f * r / 100, lay: b2 * (1 - c / 100)}
+                        layWins: {back: -b1, free: f * r /100, lay: b2 * (1 - c / 100)}
                     };
 
                     this.setState({
