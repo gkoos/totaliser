@@ -5,8 +5,12 @@ var calc = require('calc');
 var ProfitBreakdown = require('ProfitBreakdown');
 
 var Calculator = React.createClass({
+    componentDidMount: function() {
+        this.calculate();
+    },
+
     getInitialState: function() {
-        return {
+        return JSON.parse(sessionStorage.getItem('calculator')) || {
             type: 'Qualifying Bet',
             data: {
                 b1: '', o1: '', f: '', r: 80, b2: '', o2: '', c: 5
@@ -14,10 +18,12 @@ var Calculator = React.createClass({
             liability: 0,
             calculate: true,
             breakdown: {backWins: {}, layWins: {}}
-        }
+        };
     },
 
     calculate() {
+        sessionStorage.setItem('calculator', JSON.stringify(this.state));
+
         var type = this.state.type;
         var calculate = this.state.calculate;
 
@@ -136,6 +142,7 @@ var Calculator = React.createClass({
         this.setState({
             calculate: calculate
         }, function () {
+            sessionStorage.setItem('calculator', JSON.stringify(this.state));
             if (calculate) {
                 this.calculate();
             }
@@ -152,10 +159,6 @@ var Calculator = React.createClass({
         this.setState({
             data: data
         }, this.calculate);
-    },
-
-    handleBlur: function(e) {
-        this.calculate();
     },
 
     render: function () {
@@ -181,20 +184,20 @@ var Calculator = React.createClass({
                                 <h3>Back Bet</h3>
                                 <div className="form-line">
                                     <label htmlFor="b1">Bet: £</label>
-                                    <input id="b1" ref="b1" className="small-input" type="text" value={data.b1} onBlur={this.handleBlur} onChange={this.handleChange}/>
+                                    <input id="b1" ref="b1" className="small-input" type="text" value={data.b1} onChange={this.handleChange}/>
                                 </div>
                                 <div className="form-line">
                                     <label htmlFor="o1">Odds: </label>
-                                    <input id="o1" ref="o1" className="smaller-input" type="text" value={data.o1} onBlur={this.handleBlur} onChange={this.handleChange}/>
+                                    <input id="o1" ref="o1" className="smaller-input" type="text" value={data.o1} onChange={this.handleChange}/>
                                 </div>
                                 <div className = {type!='Risk Free Bet' ? 'hidden' : ''}>
                                     <div className="form-line">
                                         <label htmlFor="f">Free Bet Award: </label>
-                                        <input id="f" ref="f" className="small-input" type="text" value={data.f} onBlur={this.handleBlur} onChange={this.handleChange}/>
+                                        <input id="f" ref="f" className="small-input" type="text" value={data.f} onChange={this.handleChange}/>
                                     </div>
                                     <div className="form-line">
                                         <label htmlFor="f">Free Bet Ret.: %</label>
-                                        <input id="r" ref="r" className="smaller-input" type="text" value={data.r} onBlur={this.handleBlur} onChange={this.handleChange}/>
+                                        <input id="r" ref="r" className="smaller-input" type="text" value={data.r} onChange={this.handleChange}/>
                                     </div>
                                 </div>
                             </div>
@@ -204,18 +207,18 @@ var Calculator = React.createClass({
                                 <h3>Lay Bet</h3>
                                 <div className="form-line">
                                     <label htmlFor="b2">Bet: £</label>
-                                    <input disabled={calculate} id="b2" ref="b2" className="small-input" type="text" value={data.b2} onBlur={this.handleBlur} onChange={this.handleChange}/>
+                                    <input disabled={calculate} id="b2" ref="b2" className="small-input" type="text" value={data.b2} onChange={this.handleChange}/>
                                     <label className="non-wrappable">
                                         <input ref="calculate" id="calculate" type="checkbox" checked={calculate} onChange={this.handleChangeCalculate}/>Calculate
                                     </label>
                                 </div>
                                 <div className="form-line">
                                     <label htmlFor="o2">Odds: </label>
-                                    <input id="o2" ref="o2" className="smaller-input" type="text" value={data.o2} onBlur={this.handleBlur} onChange={this.handleChange}/>
+                                    <input id="o2" ref="o2" className="smaller-input" type="text" value={data.o2} onChange={this.handleChange}/>
                                 </div>
                                 <div className="form-line">
                                     <label htmlFor="c">Commission: %</label>
-                                    <input id="c" ref="c" className="smaller-input" type="text" value={data.c} onBlur={this.handleBlur} onChange={this.handleChange}/>
+                                    <input id="c" ref="c" className="smaller-input" type="text" value={data.c} onChange={this.handleChange}/>
                                 </div>
                                 <div className="form-line">
                                     <label>Liability: </label>
