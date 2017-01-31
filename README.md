@@ -1,4 +1,4 @@
-# MBCalc Matched Betting Calculator
+# Totaliser Matched Betting Calculator
 
 Simple matched betting calculator to display a detailed profit breakdown and calculate the lay stake for the same profit regardless the outcome. Created with React.js.
 
