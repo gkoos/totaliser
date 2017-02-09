@@ -1,5 +1,6 @@
 var React = require('react');
 var Profit = require('Profit');
+var Rate = require('Rate');
 var calc = require('calc');
 
 var ProfitBreakdown = React.createClass({
@@ -19,7 +20,10 @@ var ProfitBreakdown = React.createClass({
                 <table className="pure-table pure-table-horizontal profit-table">
                     <thead>
                     <tr>
-                        <th colSpan={5}>Profit Breakdown</th>
+                        <th colSpan={5}>
+                            Rate: <Rate value={breakdown.rate}/><br/>
+                            Profit Breakdown
+                        </th>
                     </tr>
                     </thead>
 

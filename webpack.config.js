@@ -17,6 +17,7 @@ module.exports = {
             Calculator: 'app/components/Calculator.jsx',
             ProfitBreakdown: 'app/components/ProfitBreakdown.jsx',
             Profit: 'app/components/Profit.jsx',
+            Rate: 'app/components/Rate.jsx',
             About: 'app/components/About.jsx',
             Help: 'app/components/Help.jsx',
             applicationStyles: 'app/styles/app.scss'

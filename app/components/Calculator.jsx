@@ -22,19 +22,27 @@ var Calculator = React.createClass({
     },
 
     calculate() {
+        this.setState({
+            liability: false,
+            breakdown: {backWins: {}, layWins: {}}
+        });
+
         sessionStorage.setItem('calculator', JSON.stringify(this.state));
 
         var type = this.state.type;
         var calculate = this.state.calculate;
 
-        var b1 = this.state.data.b1;
-        var o1 = this.state.data.o1;
+        var b1 = parseFloat(this.state.data.b1);
+        var o1 = parseFloat(this.state.data.o1);
         var f = this.state.data.f;
         var r = this.state.data.r;
 
-        var b2 = this.state.data.b2;
-        var o2 = this.state.data.o2;
-        var c = this.state.data.c;
+        var b2 = parseFloat(this.state.data.b2);
+        var o2 = parseFloat(this.state.data.o2);
+        var c = parseFloat(this.state.data.c);
+        if (isNaN(c)) {
+            c = 0;
+        }
 
         var liability = (b2 && o2) ? b2 * (o2 - 1) : 0;
 
@@ -54,7 +62,8 @@ var Calculator = React.createClass({
 
                     var breakdown = {
                         backWins: {back: b1 * (o1 - 1), lay: -b2 * (o2 - 1)},
-                        layWins: {back: -b1, lay: b2 * (1 - c / 100)}
+                        layWins: {back: -b1, lay: b2 * (1 - c / 100)},
+                        rate: calc.round2(100 * o1 * (2 - c / 100) / (o1 + o2 - c / 100))
                     };
 
                     this.setState({
@@ -75,7 +84,8 @@ var Calculator = React.createClass({
 
                     var breakdown = {
                         backWins: {back: b1 * (o1 - 1), lay: -b2 * (o2 - 1)},
-                        layWins: {back: 0, lay: b2 * (1 - c / 100)}
+                        layWins: {back: 0, lay: b2 * (1 - c / 100)},
+                        rate: calc.round2(100 * o1 * (2 - c / 100) / (o1 + o2 - c / 100))
                     };
 
                     this.setState({
@@ -96,7 +106,8 @@ var Calculator = React.createClass({
 
                     var breakdown = {
                         backWins: {back: b1 * o1, lay: -b2 * (o2 - 1)},
-                        layWins: {back: 0, lay: b2 * (1 - c / 100)}
+                        layWins: {back: 0, lay: b2 * (1 - c / 100)},
+                        rate: calc.round2(100 * o1 * (2 - c / 100) / (o1 + o2 - c / 100))
                     };
 
                     this.setState({
@@ -117,7 +128,8 @@ var Calculator = React.createClass({
 
                     var breakdown = {
                         backWins: {back: b1 * (o1 - 1), lay: -b2 * (o2 - 1)},
-                        layWins: {back: -b1, free: f * r /100, lay: b2 * (1 - c / 100)}
+                        layWins: {back: -b1, free: f * r /100, lay: b2 * (1 - c / 100)},
+                        rate: calc.round2(100 * o1 * (2 - c / 100) / (o1 + o2 - c / 100))
                     };
 
                     this.setState({
